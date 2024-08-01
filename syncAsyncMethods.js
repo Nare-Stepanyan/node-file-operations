@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const fileSystem = require("node:fs");
+const path = require("path");
 
 /*********************************
  
@@ -14,17 +15,22 @@ const fileSystem = require("node:fs");
 
 ***********************************/
 
+const filePath = path.join(__dirname, "txt/template.txt");
+
 // This will block the entire event loop
 const useSyncMethods = () => {
-  const data = fileSystem.readFileSync("txt/template.txt", "utf-8");
-  fileSystem.writeFileSync("txt/templateCopy.txt", data);
+  const filePathWrite = path.join(__dirname, "txt/templateCopy.txt");
+  const data = fileSystem.readFileSync(filePath, "utf-8");
+  fileSystem.writeFileSync(filePathWrite, data);
 };
 
 // This will allow other I/O operations continue running in the event loop
 const useAsyncMethods = async () => {
   try {
-    const data = await fs.readFile("txt/template.txt", "utf-8");
-    await fs.writeFile("txt/templateCopyAsync.txt", data);
+    const filePathWrite = path.join(__dirname, "txt/templateCopyAsync.txt");
+
+    const data = await fs.readFile(filePath, "utf-8");
+    await fs.writeFile(filePathWrite, data);
   } catch (err) {
     console.log(err);
   }

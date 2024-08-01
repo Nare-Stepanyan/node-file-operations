@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const path = require('path');
 
 /*********************************
  
@@ -12,11 +13,13 @@ const fs = require("fs").promises;
 
 ***********************************/
 
+const filePath = path.join(__dirname, "txt/example.txt");
+
+
 const data = "Hello, World!\n";
 const dataToAppend = "This is Node.js FS module.";
 
 const createFileAndModify = async () => {
-  const filePath = "txt/example.txt";
   try {
     await fs.writeFile(filePath, data);
     await fs.appendFile(filePath, dataToAppend);

@@ -1,4 +1,6 @@
 const fs = require("fs").promises;
+const path = require('path');
+const constants = require("./constants")
 
 /*********************************
  
@@ -11,9 +13,11 @@ const fs = require("fs").promises;
 
 ***********************************/
 
+const filePath = path.join(__dirname, "txt/template.txt");
+
 const printMetadata = async () => {
   try {
-    const metadata = await fs.stat("txt/template.txt");
+    const metadata = await fs.stat(filePath);
     console.log(metadata);
   } catch (err) {
     console.log(err.message);
@@ -21,7 +25,7 @@ const printMetadata = async () => {
 };
 const makeFileReadOnly = async () => {
   try {
-    await fs.chmod("txt/template.txt", 0o400);
+    await fs.chmod(filePath, constants.readonly);
   } catch (err) {
     console.log(err.message);
   }

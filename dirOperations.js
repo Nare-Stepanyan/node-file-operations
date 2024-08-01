@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const path = require('path');
 
 /*********************************
  
@@ -15,18 +16,21 @@ const fs = require("fs").promises;
 
 // This function is just for watching the changes
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const data = "Hello, World!\n";
+const filePath = path.join(__dirname, "testDir");
+
 
 const createAndManageDirectory = async () => {
   try {
-    await fs.mkdir("testDir", { recursive: true });
-    await fs.writeFile("testDir/testFile.txt", data);
+    await fs.mkdir(filePath, { recursive: true });
+    await fs.writeFile(`${filePath}/testFile.txt`, data);
     await delay(3000);
-    await fs.rename("testDir/testFile.txt", "testDir/renamedFile.txt");
+    await fs.rename(`${filePath}/testFile.txt`, `${filePath}/renamedFile.txt`);
     await delay(3000);
-    await fs.unlink("testDir/renamedFile.txt");
+    await fs.unlink(`${filePath}/renamedFile.txt`);
     await delay(3000);
-    await fs.rmdir("testDir");
+    await fs.rmdir(filePath);
   } catch (err) {
     console.log(err);
   }

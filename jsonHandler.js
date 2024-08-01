@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const path = require("path");
 
 /*********************************
  
@@ -12,13 +13,15 @@ const fs = require("fs").promises;
 
 ***********************************/
 
+const filePath = path.join(__dirname, "data.json");
+
 const addUser = async (user) => {
   try {
-    const users = await fs.readFile("data.json", "utf-8");
+    const users = await fs.readFile(filePath, "utf-8");
     const userList = JSON.parse(users);
     userList.users.push(user);
     const convertedUserList = JSON.stringify(userList, null, 2);
-    await fs.writeFile("data.json", convertedUserList);
+    await fs.writeFile(filePath, convertedUserList);
   } catch (err) {
     console.log(err);
   }

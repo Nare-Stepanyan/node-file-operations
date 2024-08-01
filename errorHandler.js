@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const path = require('path');
 
 /*********************************
  
@@ -11,9 +12,12 @@ const fs = require("fs").promises;
 
 ***********************************/
 
+const filePath = path.join(__dirname, "txt/file.txt");
+
+
 const handleErrors = async () => {
   try {
-    await fs.readFile("txt/file.txt", "utf-8");
+    await fs.readFile(filePath, "utf-8");
   } catch (err) {
     console.log(`Error: ${err.message}`);
   }

@@ -1,4 +1,5 @@
 const fs = require("node:fs");
+const path = require("path");
 
 /*********************************
 
@@ -11,7 +12,7 @@ const fs = require("node:fs");
 
 ***********************************/
 
-const filePath = "watchDir";
+const filePath = path.join(__dirname, "watchDir");
 const watcher = fs.watch(filePath);
 watcher.on("change", (eventType, fileName) => {
   if (eventType === "change") {

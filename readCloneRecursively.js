@@ -1,4 +1,5 @@
 const fs = require("fs").promises;
+const path = require("path");
 
 /*********************************
  
@@ -11,13 +12,16 @@ const fs = require("fs").promises;
 
 ***********************************/
 
+const filePath = path.join(__dirname, "txt");
+const filePathCopy = path.join(__dirname, "copy");
+
 const displayFilesAndDirectories = async () => {
-  const data = await fs.readdir("txt", { recursive: true });
+  const data = await fs.readdir(filePath, { recursive: true });
   console.log(data);
 };
 
 const cloneDirectoryContent = async () => {
-  await fs.cp("txt", "copy", { recursive: true });
+  await fs.cp(filePath, filePathCopy, { recursive: true });
 };
 
 displayFilesAndDirectories();
